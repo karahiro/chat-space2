@@ -1,1 +1,23 @@
 = render 'shared/side_bar'
+
+.chat-main
+  .chat-main__header
+    .chat-main__header--name
+      sample
+    .chat-main__header--edit-btn
+      edit
+    .chat-main__header--members
+      MEMBER:hiroki
+  .chat-main__body
+    .chat-main__body--name
+      hiroki
+    .chat-main__body--date
+      1111/11/11 11:11:11
+    .chat-main__body--message
+      おはよう
+  %form.chat-main__footer
+    %input{type: "text", placeholder: "type a message", class: "chat-main__footer-message"}
+      %label.chat-main__footer-message--image
+        %i.fa.fa-image
+        %input{type: "file", class: "file"}
+    %input{type: "submit", placeholder: "Send", class: "chat-main__footer--send"}
