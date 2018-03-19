@@ -57,19 +57,20 @@
     padding: 0 40px;
     background-color: #B8C3C7;
     position: relative;
-    display: flex;
-    align-items: center;
     &-message {
       font-size: 16px;
       box-sizing: border-box;
       height: 50px;
-      width: calc(100% - 130px);
+      width: calc(100vw - 485px);
       padding: 15px 10px;
       background-color: white;
       border: none;
+      position: absolute;
+      top: 20px;
       &--image {
         position: absolute;
-          right: 180px;
+          left: 403px;
+          top: 17px;
         .file {
           display: none;
         }
@@ -82,6 +83,9 @@
       text-align: center;
       background-color: #38AEF0;
       margin: 0 0 0 15px;
+      position: absolute;
+      top: 20px;
+      right: 40px;
     }
   }
 }

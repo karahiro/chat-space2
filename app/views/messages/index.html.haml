@@ -3,21 +3,20 @@
 .chat-main
   .chat-main__header
     .chat-main__header--name
-      sample
+      = @group.name
     .chat-main__header--edit-btn
       edit
     .chat-main__header--members
-      MEMBER:hiroki
+      Menber:
+      - @group.users.each do |user|
+        = user.name
   .chat-main__body
-    .chat-main__body--name
-      hiroki
-    .chat-main__body--date
-      1111/11/11 11:11:11
-    .chat-main__body--message
-      おはよう
-  %form.chat-main__footer
-    %input{type: "text", placeholder: "type a message", class: "chat-main__footer-message"}
-      %label.chat-main__footer-message--image
-        %i.fa.fa-image
-        %input{type: "file", class: "file"}
-    %input{type: "submit", placeholder: "Send", class: "chat-main__footer--send"}
+    = render partial: 'message', collection: @messages
+  .chat-main__footer
+    = form_for [@group, @message] do |f|
+      = f.text_field :content, class: 'chat-main__footer-message', placeholder: 'type a message'
+      .chat-main__footer-message--image
+        = f.label :image, class: 'chat-main__footer-message--image' do
+          = fa_icon 'image', class: 'icon'
+          = f.file_field :image, class: 'file'
+      = f.submit 'Send', class: 'chat-main__footer--send'
