@@ -15,3 +15,7 @@
 
 # Ignore Byebug command history file.
 .byebug_history
+
+public/uploads/message/image/197/15aa7f12-s.jpg
+
+*.jpg
