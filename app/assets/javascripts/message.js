@@ -1,4 +1,15 @@
 $(function(){
+
+  function flash() {
+    var html =
+      `<p class="notice">メッセージを送信しました</p>`
+    $('.notification').append(html);
+    $('.notice').fadeIn(500).fadeOut(2000); //指定したクラスを0.5秒でfade inさせて、2秒でfade outさせる。
+    setTimeout(function(){
+     $('.notice').remove();
+    },2500); //指定のクラス自体をremoveする。
+  }
+
   function buildHTML(message){
     var insertImage = '';
     if (message.image) {
@@ -36,6 +47,7 @@ $(function(){
       var html = buildHTML(data);
       $('.chat-main__body').append(html)
       $('#textbox').val('')
+      flash();
       var position = $('#chat-main__body').offset().top;
       $('.chat-main__body').animate({scrollTop: position + "99px"}, 500);
     })
