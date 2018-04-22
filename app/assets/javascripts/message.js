@@ -1,8 +1,7 @@
-$(function(){
+$(document).on("turbolinks:load", function() {
 
   function flash() {
-    var html =
-      `<p class="notice">メッセージを送信しました</p>`
+    var html =`<p class="notice">メッセージを送信しました</p>`
     $('.notification').append(html);
     $('.notice').fadeIn(500).fadeOut(2000); //指定したクラスを0.5秒でfade inさせて、2秒でfade outさせる。
     setTimeout(function(){
