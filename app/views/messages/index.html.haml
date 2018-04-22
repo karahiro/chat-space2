@@ -5,7 +5,7 @@
     .chat-main__header--name
       = @group.name
     .chat-main__header--edit-btn
-      edit
+      = link_to 'edit', edit_group_path(@group.id)
     .chat-main__header--members
       Menber:
       - @group.users.each do |user|
