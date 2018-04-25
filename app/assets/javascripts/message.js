@@ -54,7 +54,33 @@ $(document).on("turbolinks:load", function() {
       alert('メッセージを入力してください');
     });
     return false;
-  })
-})
+  });
+
+// メッセージ自動更新
+    var interval = setInterval(function() {
+      if (window.location.href.match(/\/groups\/\d+\/messages/)) {
+    $.ajax({
+      type: 'GET',
+      url: location.href,
+      dataType: 'json'
+    })
+    .done(function(data) {
+      var id = $('.chat-main__body').find('.chat-main__body--id');
+      var insertHTML = '';
+      data.messages.forEach(function(message) {
+        if (message.id > id ) {
+          insertHTML += buildHTML(message);
+        }
+      });
+      $('.chat-main__body').prepend(insertHTML);
+      console.log("自動更新に成功しました");
+    })
+    .fail(function(data) {
+      alert('自動更新に失敗しました');
+    });
+  } else {
+    clearInterval(interval);
+   }} , 5 * 1000 );
+});
 
 

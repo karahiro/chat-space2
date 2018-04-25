@@ -34,6 +34,9 @@
     height: calc(100vh - 190px);
     padding: 0 40px;
     overflow: scroll;
+    &--id{
+      display: none;
+    }
     &--name {
       font-size: 16px;
       font-weight: bold;
