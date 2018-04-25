@@ -11,7 +11,7 @@
       - @group.users.each do |user|
         = user.name
   .chat-main__body
-    = render partial: 'message', collection: @messages
+    = render partial: 'message', collection: @messages, as: :message
   #chat-main__body
   .chat-main__footer
     = form_for [@group, @message], id:'new_message' do |f|
