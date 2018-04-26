@@ -1,12 +1,16 @@
 $(document).on("turbolinks:load", function() {
 
+    $(function(){
+    setInterval(update, 5000);
+  });
+
   function flash() {
     var html =`<p class="notice">メッセージを送信しました</p>`
     $('.notification').append(html);
-    $('.notice').fadeIn(500).fadeOut(2000); //指定したクラスを0.5秒でfade inさせて、2秒でfade outさせる。
+    $('.notice').fadeIn(500).fadeOut(2000);
     setTimeout(function(){
      $('.notice').remove();
-    },2500); //指定のクラス自体をremoveする。
+    },2500);
   }
 
   function buildHTML(message){
@@ -14,7 +18,8 @@ $(document).on("turbolinks:load", function() {
     if (message.image) {
       insertImage = `<img src="${message.image}">`;
     }
-    var html = `<div class="chat-main__body--name">
+    var html = `<div class="chat-main__body--id" data-message-id="${message.id}">
+                <div class="chat-main__body--name">
                   ${message.user_name}
                 </div>
                 <div class="chat-main__body--date">
@@ -27,6 +32,7 @@ $(document).on("turbolinks:load", function() {
                 <img class='lower-message__image'>
                   ${insertImage}
                 </img>
+                </div>
                 </div>`
     return html;
   }
@@ -54,7 +60,32 @@ $(document).on("turbolinks:load", function() {
       alert('メッセージを入力してください');
     });
     return false;
-  })
-})
+  });
 
 
+  function update(){
+     if($('.chat-main__body--id')[0]){
+      var message_id = $('.chat-main__body--id:last').data('messageId');
+    } else {
+      var message_id = 0
+    }
+
+    var message_id = $('.chat-main__body--id:last').data('messageId');
+   $.ajax({
+      url: location.href,
+      type: 'GET',
+      data: {
+        message: { id: message_id }
+      },
+      dataType: 'json'
+    })
+    .done(function(data){
+      $.each(data, function(i, data){
+        var html = buildHTML(data);
+        $('.chat-main__body').append(html)
+        var position = $('#chat-main__body').offset().top;
+        $('.chat-main__body').animate({scrollTop: position + "99px"}, 500);
+      });
+    });
+  }
+});
